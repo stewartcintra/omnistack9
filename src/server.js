@@ -10,7 +10,7 @@ const routes = require('./routes');
 
 const app = express();
 const server = http.Server(app);
-const io = server.socketio(server);
+const io = socketio(server);
 
 mongoose.connect('mongodb+srv://omnistack:omnistack@oministack-zajqa.mongodb.net/semana09?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -20,9 +20,9 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@oministack-zajqa.mongodb.net
 const connectedUsers = {};
 io.on('connection', socket => {
     console.log('Usuario conectado:', socket.id);
-    console.log(socket.handShake.query);
+    console.log(socket.handshake.query);
 
-    const { user_id } = socket.handShake.query;
+    const { user_id } = socket.handshake.query;
     connectedUsers[user_id] = socket.id;
     //socket.emit('hello', 'word');
 })
